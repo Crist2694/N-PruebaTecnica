@@ -1,0 +1,11 @@
+1.- en la raíz del proyecto en la terminal hacer un mvn install
+2.- en la carpeta de target crear imagen docker con el comando:
+	docker build -t [nombre_imagen] .
+	ejemplo: docker build -t tec-prueba .
+3.- levantar la imagen docker con el comando:
+	docker run --name [nombre_levantar] -p [puertos] [nombre_imagen] -d
+	ejemplo: docker run --name prtecnica -p 8080:8080 tec-prueba -d
+
+Si se desea corroborar que el componente esté bien antes de crear la imagen docker, en la carpeta target
+ejecuta el siguiente comando:
+ java -jar .\PruebaTecnica-1.0-SNAPSHOT.jar

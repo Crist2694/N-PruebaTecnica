@@ -1,0 +1,16 @@
+org\example\entity\Cuenta.class
+org\example\services\ClienteService.class
+org\example\controller\ClienteController.class
+org\example\repositories\CuentaRepository.class
+org\example\controller\PersonaController.class
+org\example\controller\CuentaController.class
+org\example\services\PersonaService.class
+org\example\util\JpaUtil.class
+org\example\controller\AddResponse.class
+org\example\entity\Cliente.class
+org\example\SpringBootPersonaServiceProjectApplication.class
+org\example\entity\Persona.class
+org\example\repositories\ClienteRepository.class
+org\example\services\CuentaService.class
+org\example\controller\GeneralController.class
+org\example\repositories\PersonaRepository.class
