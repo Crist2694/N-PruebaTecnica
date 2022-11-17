@@ -1,0 +1,9 @@
+{
+    "numero_cuenta": "585545",
+    "tipo_cuenta": "Corriente",
+    "saldo_inicial": 1000.0,
+    "estado": "True",
+    "idcliente": {
+                "id": 1
+            }
+}
