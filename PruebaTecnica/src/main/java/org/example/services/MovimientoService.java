@@ -69,10 +69,7 @@ public class MovimientoService {
     }
 
     public Movimiento addMovimiento(Movimiento movimiento) {
-        /*movimiento.setId(getMaxId());
-        movimientoIdMap.put(movimiento.getId(), movimiento);
-        return movimiento;
-         */
+
 
         movimiento.setId(getMaxId());
 
