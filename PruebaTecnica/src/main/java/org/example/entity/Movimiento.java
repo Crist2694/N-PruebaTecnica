@@ -20,7 +20,7 @@ public class Movimiento {
     int id;
 
     @Column(name = "fecha")
-    String fecha = String.valueOf(LocalDateTime.now());
+    String fecha = String.valueOf(LocalDate.now());
 
     @Column(name = "tipo_movimiento")
     String tipo_movimiento;
