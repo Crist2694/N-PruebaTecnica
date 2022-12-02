@@ -45,7 +45,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "{"+
+        return "{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", genero='" + genero + '\'' +

@@ -16,41 +16,41 @@ public class CuentaController {
     CuentaService cuentaService;
 
     @GetMapping("/getCuentas")
-    public List<Cuenta> getCuentas(){
+    public List<Cuenta> getCuentas() {
         //return cuentaService.getAllCuentas();
         return cuentaService.getAllCuentas();
     }
 
     @GetMapping("/getCuentasId/{id}")
-    public ResponseEntity<Cuenta> getCuentaById(@PathVariable(value = "id") int id){
+    public ResponseEntity<Cuenta> getCuentaById(@PathVariable(value = "id") int id) {
         //return cuentaService.getCuentaById(id);
         try {
             Cuenta cuenta = cuentaService.getCuentaById(id);
             return new ResponseEntity<Cuenta>(cuenta, HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
     }
 
     @GetMapping("/getCuentasNumero/{numero_cuenta}")
-    public ResponseEntity<Cuenta> getCuentaByNumero(@RequestParam(value = "numero_cuenta") String numero_cuenta){
+    public ResponseEntity<Cuenta> getCuentaByNumero(@RequestParam(value = "numero_cuenta") Long numero_cuenta) {
         //return cuentaService.getCuentaByNumero(numero_cuenta);
         try {
             Cuenta cuenta = cuentaService.getCuentaByNumero(numero_cuenta);
             return new ResponseEntity<Cuenta>(cuenta, HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("/addCuenta")
-    public Cuenta addCuenta(@RequestBody Cuenta cuenta){
+    public Cuenta addCuenta(@RequestBody Cuenta cuenta) {
         return cuentaService.addCuenta(cuenta);
     }
 
     @PutMapping("/updateCuenta/{id}")
-    public ResponseEntity<Cuenta> updateCuenta(@PathVariable(value = "id") int id, @RequestBody Cuenta cuenta){
+    public ResponseEntity<Cuenta> updateCuenta(@PathVariable(value = "id") int id, @RequestBody Cuenta cuenta) {
         //return  cuentaService.updateCuenta(cuenta);
         try {
             Cuenta existeCuenta = cuentaService.getCuentaById(id);
@@ -61,15 +61,15 @@ public class CuentaController {
             existeCuenta.setSaldo_inicial(cuenta.getSaldo_inicial());
             existeCuenta.setIdcliente(cuenta.getIdcliente());
 
-            Cuenta updated_cuenta=cuentaService.updateCuenta(existeCuenta);
+            Cuenta updated_cuenta = cuentaService.updateCuenta(existeCuenta);
             return new ResponseEntity<Cuenta>(updated_cuenta, HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
 
     @DeleteMapping("/deleteCuenta/{id}")
-    public AddResponse deleteCuenta(@PathVariable(value = "id")int id){
+    public AddResponse deleteCuenta(@PathVariable(value = "id") int id) {
         //return cuentaService.deleteCuenta(id);
         return cuentaService.deleteCuenta(id);
     }

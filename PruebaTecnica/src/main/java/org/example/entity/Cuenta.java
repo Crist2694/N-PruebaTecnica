@@ -1,5 +1,8 @@
 package org.example.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,7 +15,7 @@ public class Cuenta {
     int id;
 
     @Column(name = "numero_cuenta")
-    String numero_cuenta;
+    Long numero_cuenta;
     @Column(name = "tipo_cuenta")
     String tipo_cuenta;
     @Column(name = "saldo_inicial")
@@ -25,10 +28,13 @@ public class Cuenta {
     @JoinColumn(name = "id_cliente", nullable = false, updatable = false)
     private Cliente idcliente;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Movimiento> movimiento;
+
     public Cuenta() {
     }
 
-    public Cuenta(int id, String numero_cuenta, String tipo_cuenta, Double saldo_inicial, String estado, Cliente idcliente) {
+    public Cuenta(int id, Long numero_cuenta, String tipo_cuenta, Double saldo_inicial, String estado, Cliente idcliente) {
         this.id = id;
         this.numero_cuenta = numero_cuenta;
         this.tipo_cuenta = tipo_cuenta;
@@ -53,11 +59,11 @@ public class Cuenta {
         this.id = id;
     }
 
-    public String getNumero_cuenta() {
+    public Long getNumero_cuenta() {
         return numero_cuenta;
     }
 
-    public void setNumero_cuenta(String numero_cuenta) {
+    public void setNumero_cuenta(Long numero_cuenta) {
         this.numero_cuenta = numero_cuenta;
     }
 
@@ -83,5 +89,17 @@ public class Cuenta {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Cuenta{" +
+                "id=" + id +
+                ", numero_cuenta=" + numero_cuenta +
+                ", tipo_cuenta='" + tipo_cuenta + '\'' +
+                ", saldo_inicial=" + saldo_inicial +
+                ", estado='" + estado + '\'' +
+                ", idcliente=" + idcliente +
+                '}';
     }
 }

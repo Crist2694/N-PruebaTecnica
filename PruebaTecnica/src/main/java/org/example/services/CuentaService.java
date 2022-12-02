@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Component
@@ -50,7 +48,7 @@ public class CuentaService {
         return cuentaRep.findById(id).get();
     }
 
-    public Cuenta getCuentaByNumero(String numero){
+    public Cuenta getCuentaByNumero(Long numero){
 /*        Cuenta cuenta = null;
         for (int i:cuentaIdMap.keySet()){
             if (cuentaIdMap.get(i).getNumero_cuenta().equals(numero))
@@ -62,7 +60,7 @@ public class CuentaService {
         Cuenta cuenta = null;
 
         for (Cuenta con:cuentas){
-            if (con.getNumero_cuenta().equalsIgnoreCase(numero))
+            if (con.getNumero_cuenta().equals(numero))
                 cuenta = con;
         }
         return cuenta;
@@ -110,5 +108,10 @@ public class CuentaService {
         res.setId(id);
         return res;
     }
+
+
+
+
+
 
 }

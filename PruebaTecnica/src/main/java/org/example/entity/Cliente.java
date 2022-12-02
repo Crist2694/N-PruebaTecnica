@@ -1,10 +1,11 @@
 package org.example.entity;
 
-import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
 
+@ToString
 @Entity
 @Table(name = "clientes")
 public class Cliente {
