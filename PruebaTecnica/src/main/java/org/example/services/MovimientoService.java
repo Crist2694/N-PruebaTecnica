@@ -51,19 +51,13 @@ public class MovimientoService {
      */
 
     public List<Movimiento> getAllMovimientos() {
-       /* List movimientos= new ArrayList(movimientoIdMap.values());
-        return movimientos;
-        */
-
+       
         return movimientoRep.findAll();
 
     }
 
     public Movimiento getMovimientoById(int id) {
-        /*Movimiento movimiento =movimientoIdMap.get(id);
-        //movimiento = em.find(Movimiento.class, movimiento.getId());
-        return movimiento;
-         */
+
 
         return movimientoRep.findById(id).get();
     }
