@@ -36,9 +36,6 @@ public class Movimiento {
     @JoinColumn(name = "cuenta_destino")
     private Cuenta cuenta_destino;
 
-
-
-
     public Movimiento(int id, String fecha, String tipo_movimiento, Double valor, Cuenta cuenta_origen, Cuenta cuenta_destino) {
         this.id = id;
         this.fecha = fecha;

@@ -17,13 +17,11 @@ public class CuentaController {
 
     @GetMapping("/getCuentas")
     public List<Cuenta> getCuentas() {
-        //return cuentaService.getAllCuentas();
         return cuentaService.getAllCuentas();
     }
 
     @GetMapping("/getCuentasId/{id}")
     public ResponseEntity<Cuenta> getCuentaById(@PathVariable(value = "id") int id) {
-        //return cuentaService.getCuentaById(id);
         try {
             Cuenta cuenta = cuentaService.getCuentaById(id);
             return new ResponseEntity<Cuenta>(cuenta, HttpStatus.OK);
@@ -35,7 +33,6 @@ public class CuentaController {
 
     @GetMapping("/getCuentasNumero/{numero_cuenta}")
     public ResponseEntity<Cuenta> getCuentaByNumero(@RequestParam(value = "numero_cuenta") Long numero_cuenta) {
-        //return cuentaService.getCuentaByNumero(numero_cuenta);
         try {
             Cuenta cuenta = cuentaService.getCuentaByNumero(numero_cuenta);
             return new ResponseEntity<Cuenta>(cuenta, HttpStatus.OK);
@@ -51,7 +48,6 @@ public class CuentaController {
 
     @PutMapping("/updateCuenta/{id}")
     public ResponseEntity<Cuenta> updateCuenta(@PathVariable(value = "id") int id, @RequestBody Cuenta cuenta) {
-        //return  cuentaService.updateCuenta(cuenta);
         try {
             Cuenta existeCuenta = cuentaService.getCuentaById(id);
 
@@ -70,7 +66,6 @@ public class CuentaController {
 
     @DeleteMapping("/deleteCuenta/{id}")
     public AddResponse deleteCuenta(@PathVariable(value = "id") int id) {
-        //return cuentaService.deleteCuenta(id);
         return cuentaService.deleteCuenta(id);
     }
 }

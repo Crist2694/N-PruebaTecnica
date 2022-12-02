@@ -23,50 +23,17 @@ public class MovimientoService {
 
     @Autowired
     CuentaService cuentaService;
-    /*
-    static HashMap<Integer, Movimiento> movimientoIdMap;
-
-  //EntityManager em = JpaUtil.getEntityManager();
-    public MovimientoService(){
-        movimientoIdMap = new HashMap<Integer, Movimiento>();
-        Persona persona = new Persona(1, "Jose Lema", "M", 23, "12345", "Otavalo sn y principal", "098254785");
-        Persona persona2 = new Persona(2, "Marianela Montalvo", "F", 22, "67891", "Amazonas y NNUU", "097548965");
-
-        Cliente cliente = new Cliente(1, "1234", "True", persona);
-        Cliente cliente2= new Cliente(2, "5678", "True", persona2);
-
-        Cuenta cuentaOrigen = new Cuenta(1,478758L, "Ahorro", 2000.0, "True", cliente);
-        Cuenta cuentaDestino= new Cuenta(2, 225487L, "Corriente", 100.0, "True", cliente2);
-
-        Movimiento movimiento1= new Movimiento(1, "hoy", "-", 200.0,1, 2);
-        Movimiento movimiento2= new Movimiento(2, "ayer", "+", 200.0, 1, 2);
-        Movimiento movimiento3= new Movimiento(3, "pasado", "-", 100.0, 1, 2);
-
-        movimientoIdMap.put(1, movimiento1);
-        movimientoIdMap.put(2, movimiento2);
-        movimientoIdMap.put(3, movimiento3);
-
-    }
-
-     */
 
     public List<Movimiento> getAllMovimientos() {
-       
         return movimientoRep.findAll();
-
     }
 
     public Movimiento getMovimientoById(int id) {
-
-
         return movimientoRep.findById(id).get();
     }
 
     public Movimiento addMovimiento(Movimiento movimiento) {
-
-
         movimiento.setId(getMaxId());
-
         System.out.println(movimiento);
         System.out.println("Cuenta origen " + movimiento.getCuenta_origen());
         System.out.println("Cuenta destino " + movimiento.getCuenta_destino());
@@ -111,36 +78,15 @@ public class MovimientoService {
     }
 
     public int getMaxId() {
-        /*int max=0;
-        for (int id:movimientoIdMap.keySet())
-            if (max<=id)
-                max=id;
-        return max+1;
-         */
-
-
         return movimientoRep.findAll().size() + 2;
     }
 
     public Movimiento updateMovimient(Movimiento movimiento) {
-        /*if (movimiento.getId()>0)
-            movimientoIdMap.put(movimiento.getId(), movimiento);
-        //em.merge(movimiento);
-        return movimiento;
-
-         */
-
         movimientoRep.save(movimiento);
         return movimiento;
     }
 
     public AddResponse deleteMovimiento(int id) {
-        /*movimientoIdMap.remove(id);
-        AddResponse res = new AddResponse();
-        res.setMsg("Movimiento Eliminado...!!");
-        res.setId(id);
-        return res;
-         */
 
         movimientoRep.deleteById(id);
         AddResponse res = new AddResponse();

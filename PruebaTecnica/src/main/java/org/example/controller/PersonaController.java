@@ -22,7 +22,6 @@ public class PersonaController {
 
     @GetMapping("/getPersonas")
     public ResponseEntity<List<Persona>> getPersona() {
-        //return personaService.getAllPersonas();
         try {
             List<Persona> personas = personaService.getAllPersonas();
             return new ResponseEntity<List<Persona>>(personas, HttpStatus.FOUND);
@@ -34,7 +33,6 @@ public class PersonaController {
 
     @GetMapping("/getPersonas/{id}")
     public ResponseEntity<Persona> getPersonaById(@PathVariable(value = "id") int id) {
-        //return personaService.getPersonaById(id);
         try {
             Persona persona = personaService.getPersonaById(id);
             return new ResponseEntity<Persona>(persona, HttpStatus.OK);
@@ -45,7 +43,6 @@ public class PersonaController {
 
     @GetMapping("/getPersonas/nombrePersona")
     public ResponseEntity<Persona> getPersonaByName(@RequestParam(value = "name") String name) {
-        //return personaService.getPersonaByName(name);
         try {
             Persona persona = personaService.getPersonaByName(name);
             return new ResponseEntity<Persona>(persona, HttpStatus.FOUND);
@@ -66,7 +63,6 @@ public class PersonaController {
 
     @PutMapping("/updatePersona/{id}")
     public ResponseEntity<Persona> updatePersona(@PathVariable(value = "id") int id, @RequestBody Persona persona) {
-        // return personaService.updatePersona(persona);
 
         try {
             Persona existePersona = personaService.getPersonaById(id);
@@ -87,7 +83,6 @@ public class PersonaController {
 
     @DeleteMapping("/deletePersona/{id}")
     public ResponseEntity<Persona> deletePersona(@PathVariable(value = "id") int id) {
-        //return personaService.deletePersona(id);
 
         Persona persona = null;
         try {

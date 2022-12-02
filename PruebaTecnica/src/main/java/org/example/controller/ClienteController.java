@@ -13,20 +13,16 @@ import java.util.NoSuchElementException;
 @RestController
 public class ClienteController {
 
-    //ClienteService clienteService = new ClienteService();
-
     @Autowired
     ClienteService clienteService;
 
     @GetMapping("/getclientes")
     public List<Cliente> getClientes() {
-        // return clienteService.getAllClientes();
         return clienteService.getAllClientes();
     }
 
     @GetMapping("/getclientes/{id}")
     public ResponseEntity<Cliente> getClienteById(@PathVariable(value = "id") int id) {
-        //return clienteService.getClienteById(id);
         try {
             Cliente cliente = clienteService.getClienteById(id);
             return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
@@ -37,13 +33,11 @@ public class ClienteController {
 
     @PostMapping("/addcliente")
     public Cliente addCliente(@RequestBody Cliente cliente) {
-        //return clienteService.addCliente(cliente);
         return clienteService.addCliente(cliente);
     }
 
     @PutMapping("/updatecliente/{id}")
     public ResponseEntity<Cliente> updateCliente(@PathVariable(value = "id") int id, @RequestBody Cliente cliente) {
-        //return clienteService.updateCliente(cliente);
         try {
             Cliente existeCliente = clienteService.getClienteById(id);
 
@@ -60,7 +54,6 @@ public class ClienteController {
 
     @DeleteMapping("/deletecliente/{id}")
     public ResponseEntity<Cliente> deleteCliente(@PathVariable(value = "id") int id) {
-        //return clienteService.deleteCliente(id);
         Cliente cliente = null;
         try {
             cliente = clienteService.getClienteById(id);
