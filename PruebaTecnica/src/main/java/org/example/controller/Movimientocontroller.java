@@ -5,11 +5,14 @@ import org.example.entity.Persona;
 import org.example.services.MovimientoService;
 import org.example.util.JpaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -19,7 +22,6 @@ public class Movimientocontroller {
     @Autowired
     MovimientoService movimientoService;
 
-    EntityManager em = JpaUtil.getEntityManager();
 
     @GetMapping("/getMovimientos")
     public List<Movimiento> getMovimientos() {
@@ -29,13 +31,10 @@ public class Movimientocontroller {
     @GetMapping("/getMovimientos/{id}")
     public ResponseEntity<Movimiento> getMovimientoById(@PathVariable(value = "id") int id) {
         try {
-            em.getTransaction().begin();
             Movimiento movimiento = movimientoService.getMovimientoById(id);
             return new ResponseEntity<Movimiento>(movimiento, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }finally {
-            em.close();
         }
 
     }
@@ -43,23 +42,17 @@ public class Movimientocontroller {
     @PostMapping("/addMovimiento")
     public ResponseEntity<Movimiento> addMovimiento(@RequestBody Movimiento movimiento) {
         try {
-            em.getTransaction().begin();
             movimiento = movimientoService.addMovimiento(movimiento);
-            em.getTransaction().commit();
             return new ResponseEntity<Movimiento>(movimiento, HttpStatus.CREATED);
         }catch (NoSuchElementException e) {
-            em.getTransaction().rollback();
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }finally {
-            em.close();
         }
     }
 
     @PutMapping("/updateMovimiento/{id}")
     public ResponseEntity<Movimiento> updateMovimiento(@PathVariable(value = "id") int id, @RequestBody Movimiento movimiento) {
         try {
-            em.getTransaction().begin();
             Movimiento existMovimiento = movimientoService.getMovimientoById(id);
 
             existMovimiento.setTipo_movimiento(movimiento.getTipo_movimiento());
@@ -70,14 +63,10 @@ public class Movimientocontroller {
 
 
             Movimiento updatedMovimiento = movimientoService.updateMovimient(existMovimiento);
-            em.getTransaction().commit();
             return new ResponseEntity<Movimiento>(updatedMovimiento, HttpStatus.OK);
         } catch (Exception e) {
-            em.getTransaction().rollback();
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }finally {
-            em.close();
         }
     }
 
@@ -85,18 +74,25 @@ public class Movimientocontroller {
     public ResponseEntity<Movimiento> deleteMovimiento(@PathVariable(value = "id") int id) {
         Movimiento movimiento = null;
         try {
-            em.getTransaction().begin();
             movimiento = movimientoService.getMovimientoById(id);
             movimientoService.deleteMovimiento(id);
-            em.getTransaction().commit();
         }catch (NoSuchElementException e){
-            em.getTransaction().rollback();
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }finally {
-            em.close();
         }
         return new ResponseEntity<Movimiento>(movimiento, HttpStatus.OK);
+
+    }
+    @GetMapping("/getMovimientoFechas/")
+    @ResponseBody
+    public List<Movimiento> getMovimientosFecha(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
+            @RequestParam String nombre) {
+      try {
+          return  movimientoService.getAllMovimientosFecha(fecha, nombre);
+      }catch (NoSuchElementException e){
+          return null;
+      }
 
     }
 }

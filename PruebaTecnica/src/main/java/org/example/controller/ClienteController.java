@@ -19,7 +19,7 @@ public class ClienteController {
     @Autowired
     ClienteService clienteService;
 
-    EntityManager em = JpaUtil.getEntityManager();
+
     @GetMapping("/getclientes")
     public List<Cliente> getClientes() {
         return clienteService.getAllClientes();
@@ -28,36 +28,28 @@ public class ClienteController {
     @GetMapping("/getclientes/{id}")
     public ResponseEntity<Cliente> getClienteById(@PathVariable(value = "id") int id) {
         try {
-            em.getTransaction().begin();
+
             Cliente cliente = clienteService.getClienteById(id);
             return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }finally {
-            em.close();
         }
     }
 
     @PostMapping("/addcliente")
     public ResponseEntity<Cliente> addCliente(@RequestBody Cliente cliente) {
         try {
-            em.getTransaction().begin();
             cliente = clienteService.addCliente(cliente);
-            em.getTransaction().commit();
             return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
         } catch (NoSuchElementException e) {
-            em.getTransaction().rollback();
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }finally {
-            em.close();
         }
     }
 
     @PutMapping("/updatecliente/{id}")
     public ResponseEntity<Cliente> updateCliente(@PathVariable(value = "id") int id, @RequestBody Cliente cliente) {
         try {
-            em.getTransaction().begin();
             Cliente existeCliente = clienteService.getClienteById(id);
 
             existeCliente.setPasswd(cliente.getPasswd());
@@ -65,14 +57,10 @@ public class ClienteController {
             existeCliente.setIdPersona(cliente.getIdPersona());
 
             Cliente update_cliente = clienteService.updateCliente(existeCliente);
-            em.getTransaction().commit();
             return new ResponseEntity<Cliente>(update_cliente, HttpStatus.OK);
         } catch (Exception e) {
-            em.getTransaction().rollback();
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }finally {
-            em.close();
         }
     }
 
